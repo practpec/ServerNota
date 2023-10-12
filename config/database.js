@@ -1,10 +1,10 @@
 const mysql = require('mysql2');
 
 const dbConfig = {
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.DB_PASSWORD,
-  database: process.env.DB_DATABASE
+  host: 'bjkqndthgwwust4zkcgg-mysql.services.clever-cloud.com',
+  user: 'ukoig7bwicd8xc3i',
+  password: 'FM3BtpNBuNbtRffxa5ub',
+  database: 'bjkqndthgwwust4zkcgg'
 };
 
 // Crea un pool de conexiones
