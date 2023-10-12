@@ -9,3 +9,4 @@ router.put('/categorias/:id', categoriasController.modificarCategoria);
 router.delete('/categorias/:id', categoriasController.eliminarCategoria);
 
 module.exports = router;
+
