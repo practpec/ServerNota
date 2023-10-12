@@ -6,10 +6,10 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 const db = mysql.createConnection({
-  host: 'bjkqndthgwwust4zkcgg-mysql.services.clever-cloud.com',
-  user: 'ukoig7bwicd8xc3i',
-  password: 'FM3BtpNBuNbtRffxa5ub',
-  database: 'bjkqndthgwwust4zkcgg'
+  host: process.env.MYSQL_HOST,
+  user: process.env.MYSQL_USER,
+  password: process.env.MYSQL_PASSWORD,
+  database: process.env.MYSQL_DATABASE
 });
 db.connect((err) => {
   if (err) {
