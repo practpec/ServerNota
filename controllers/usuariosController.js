@@ -1,4 +1,4 @@
-const pool = require('../config/database');
+const pool = require('../config/index');
 
 exports.agregarUsuario = (req, res) => {
   const nuevoUsuario = req.body;

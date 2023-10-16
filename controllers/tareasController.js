@@ -1,4 +1,4 @@
-const pool = require('../config/database');
+const pool = require('../config/index');
 
 exports.mostrarTareas = (req, res) => {
   const idUsuario = req.params.id_usuario;
