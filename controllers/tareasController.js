@@ -19,9 +19,17 @@ exports.mostrarTareas = (req, res) => {
 
 exports.agregarTarea = (req, res) => {
   const tareaData = req.body;
-  const query = 'INSERT INTO tareas SET ?';
+  const query = 'INSERT INTO tareas (titulo, descripcion, fecha_vencimiento, estado, id_usuario, id_categoria) VALUES (?, ?, ?, ?, ?, ?)';
+  const values = [
+    tareaData.titulo,
+    tareaData.descripcion,
+    tareaData.fecha_vencimiento,
+    tareaData.estado,
+    tareaData.id_usuario,
+    tareaData.id_categoria
+  ];
 
-  pool.execute(query, tareaData)
+  pool.execute(query, values)
     .then(([result]) => {
       console.log('Tarea creada con éxito');
       res.status(201).json({ mensaje: 'Tarea creada con éxito', tareaId: result.insertId });
@@ -35,10 +43,12 @@ exports.agregarTarea = (req, res) => {
 exports.modificarTarea = (req, res) => {
   const tareaId = req.params.id;
   const { titulo, descripcion, fecha_vencimiento, id_categoria, estado } = req.body;
-  const camposActualizados = { titulo, descripcion, fecha_vencimiento, id_categoria, estado };
-  const query = 'UPDATE tareas SET ? WHERE id = ?';
 
-  pool.execute(query, [camposActualizados, tareaId])
+  const query = 'UPDATE tareas SET titulo = ?, descripcion = ?, fecha_vencimiento = ?, id_categoria = ?, estado = ? WHERE id = ?';
+
+  const values = [titulo, descripcion, fecha_vencimiento, id_categoria, estado, tareaId];
+
+  pool.execute(query, values)
     .then(([result]) => {
       if (result.affectedRows === 0) {
         res.status(404).json({ mensaje: 'Tarea no encontrada' });
@@ -51,6 +61,7 @@ exports.modificarTarea = (req, res) => {
       res.status(500).json({ mensaje: 'Error en el servidor' });
     });
 };
+
 
 exports.cambiarEstadoTarea = (req, res) => {
   const tareaId = req.params.id;

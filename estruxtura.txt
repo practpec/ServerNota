@@ -1,0 +1,16 @@
+servernota
+  |
+  |------config
+  |         |----index.js
+  |
+  |-----contoller
+  |       |----catergoriasController.js
+  |       |----tareasController.js
+  |       |----usuariosController.js
+  |
+  |-------routes
+  |          |------categoriasRoutes.js
+  |          |------tareasRoutes.js
+  |          |------usuariosRoutes.js
+  |
+  |------idex.js

@@ -2,9 +2,11 @@ const pool = require('../config/index');
 
 exports.agregarUsuario = (req, res) => {
   const nuevoUsuario = req.body;
-  const query = 'INSERT INTO usuarios SET ?';
+  const query = 'INSERT INTO usuarios (nombre, correo_electronico, contrasena) VALUES (?, ?, ?)';
 
-  pool.execute(query, nuevoUsuario)
+  const values = [nuevoUsuario.nombre, nuevoUsuario.correo_electronico, nuevoUsuario.contrasena];
+
+  pool.execute(query, values)
     .then(([result]) => {
       res.status(201).json({ mensaje: 'Usuario agregado con éxito' });
     })
@@ -13,6 +15,7 @@ exports.agregarUsuario = (req, res) => {
       res.status(500).json({ mensaje: 'Error en el servidor' });
     });
 };
+
 
 exports.validarUsuario = (req, res) => {
   const { correo_electronico, contrasena } = req.body;
