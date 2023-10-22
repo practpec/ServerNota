@@ -1,7 +1,8 @@
 const express = require('express');
 const app = express();
+const cors = require('cors');
 require('dotenv').config()
-
+app.use(cors({ origin: '*' }));
 app.use(express.urlencoded({extended: false}))
 app.use(express.json())
 
