@@ -30,7 +30,6 @@ exports.validarUsuario = (req, res) => {
 
   pool.execute(query, [correo_electronico, contrasena])
     .then(([results]) => {
-      console.log('Resultados del query:', results);
       if (results.length === 0) {
         return res.status(401).json({ mensaje: 'Credenciales incorrectas' });
       }
@@ -40,7 +39,6 @@ exports.validarUsuario = (req, res) => {
       return res.status(200).json({ userId, token });
     })
     .catch((error) => {
-      console.log('Resultados del query:', results);
       console.error('Error al autenticar:', error);
       return res.status(500).json({ mensaje: 'Error al autenticar' });
     });
