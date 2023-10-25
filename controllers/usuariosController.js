@@ -1,7 +1,7 @@
 const pool = require('../config/index');
 const jwt = require('jsonwebtoken');
 
-const secretKey=process.env.JWT_SECRET;
+
 exports.agregarUsuario = (req, res) => {
   const nuevoUsuario = req.body;
   const query = 'INSERT INTO usuarios (nombre, correo_electronico, contrasena) VALUES (?, ?, ?)';
@@ -21,6 +21,7 @@ exports.agregarUsuario = (req, res) => {
 
 exports.validarUsuario = (req, res) => {
   const { correo_electronico, contrasena } = req.body;
+  const secretKey=process.env.JWT_SECRET;
 
   if (!correo_electronico || !contrasena) {
     return res.status(400).json({ mensaje: 'Correo electrónico y contraseña son requeridos' });
@@ -46,8 +47,9 @@ exports.validarUsuario = (req, res) => {
 
 
 exports.verificar = (req, res,next) => {
-  const token = req.header('Authorization');
   
+  const token = req.header('Authorization');
+  const secretKey=process.env.JWT_SECRET;
   if (!token) return res.status(401).json({ message: 'Token no proporcionado' });
 
   jwt.verify(token, secretKey, (err, decoded) => {
