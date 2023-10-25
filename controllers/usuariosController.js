@@ -59,5 +59,4 @@ exports.verificar = (req, res,next) => {
   res.json({ message: 'Ruta protegida' });
 };
 
-//:)
 
